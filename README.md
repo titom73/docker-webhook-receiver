@@ -10,7 +10,7 @@ docker run -d --rm -p 8282:80 titom73/webhook-receiver:dev
 
 # Send manual webhook
 cd tests/
-bash test.sh
+curl -d @webhook-message.json -H 'Content-Type: application/json' http://localhost:8282/receiver
 {"color":"Red","fruit":"Apple","size":"Large"}
 ```
 
@@ -33,6 +33,10 @@ docker logs --follow 961
      "size": "Large"
  }
 ```
+
+## Available receivers
+
+- `/receiver`: Just print out complete message received by the server
 
 ## Python code.
 
