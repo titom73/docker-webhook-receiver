@@ -34,6 +34,8 @@ docker logs --follow 961
  }
 ```
 
+Docker image now support `amd64` and `arm64`. It means you can run this server on a embedded platform like raspberry pi 4
+
 ## Available receivers
 
 - `/receiver`: Just print out complete message received by the server
