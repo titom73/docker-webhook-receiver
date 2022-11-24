@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - main
+      - master
   schedule:
     - cron: "10 2 * * 0"
 
@@ -14,7 +15,6 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
 
     steps:
       - uses: actions/checkout@v3
@@ -35,3 +35,11 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ secrets.DOCKER_IMAGE_NAME }}:latest
+
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: ${{ secrets.DOCKER_IMAGE_NAME }}
+          readme-filepath: README.md
